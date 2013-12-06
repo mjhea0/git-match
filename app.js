@@ -41,7 +41,6 @@ app.get('/searching', function(req, res){
   };	
   request(request_options, function(err, resp, body) {
     body = JSON.parse(body);
-    console.log(body)
     // search result logic
     if (body.message)   {
       var city_results = "Sorry. The API rate limit has been exceeded. Run along now."

@@ -4,6 +4,7 @@ var http = require('http');
 var express = require('express');
 var routes = require('./routes');
 var path = require('path');
+var request = require('request');
 
 // global config
 var app = express();
@@ -30,7 +31,22 @@ app.configure('production', function(){
 app.get('/', routes.index);
 app.get('/ping', routes.ping);
 app.get('/searching', function(req, res){
-  res.send("WHEEE");
+  var city = req.query.city;
+  var language = req.query.language;
+  var url = 'https://api.github.com/legacy/user/search/location:' + city
+  var request_options = {
+    url: url,
+    headers: {'user-agent': 'git-match'},
+  };	
+  request(request_options, function(err, resp, body) {
+    body = JSON.parse(body);
+    if (Object.keys(body.users).length > 0) {
+      city_results = "body.users";
+    } else {
+      city_results = "No results found. Try again.";
+    }
+    res.send(city_results);
+  });
 });
 
 // run server

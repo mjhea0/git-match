@@ -1,12 +1,19 @@
 extends layout
 
 block content
-  #page-content-wrapper
-    .page-content.inset
-      .row
-        .col-md-12
-          h1 Say something meaningful here.
-          p.lead Say something worthwhile here.
-          a(href="/") Go home
-          br
-          a(href="/ping") Ping
+  .container
+    h1 GitMatched
+    p.lead Meet other coders
+    form(role='form')
+      .form-group
+        input.form-control#city(type='text', placeholder='Enter city')
+      .form-group
+        input.form-control#language(type='text', placeholder='Enter language')
+      button.btn.btn-default#search(type='') Search
+      br
+      br
+      #results
+
+
+
+

@@ -29,6 +29,9 @@ app.configure('production', function(){
 // routes
 app.get('/', routes.index);
 app.get('/ping', routes.ping);
+app.get('/searching', function(req, res){
+  res.send("WHEEE");
+});
 
 // run server
 app.listen(app.get('port'), function(){

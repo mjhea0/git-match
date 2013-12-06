@@ -2,12 +2,16 @@ extends layout
 
 block content
   .container
+    h1 GitMatched
+    p.lead Meet other coders
     form#searchForm(role='form')
       .form-group
         input.form-control#city(type='text', placeholder='Enter city')
       .form-group
         input.form-control#language(type='text', placeholder='Enter language')
-      button.btn.btn-default#search(type='') Search
+      button.btn.btn-default#btnSearch.search(type='') Search
+      button.btn.btn-default#btnAgain.search(type='') Try again?
+      button.btn.btn-default#btnReset(type='') Enter new city?
       br
       br
     #results

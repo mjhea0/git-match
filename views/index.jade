@@ -2,9 +2,7 @@ extends layout
 
 block content
   .container
-    h1 GitMatched
-    p.lead Meet other coders
-    form(role='form')
+    form#searchForm(role='form')
       .form-group
         input.form-control#city(type='text', placeholder='Enter city')
       .form-group
@@ -12,7 +10,7 @@ block content
       button.btn.btn-default#search(type='') Search
       br
       br
-      #results
+    #results
 
 
 

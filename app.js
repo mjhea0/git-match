@@ -40,12 +40,17 @@ app.get('/searching', function(req, res){
   };	
   request(request_options, function(err, resp, body) {
     body = JSON.parse(body);
-    if (Object.keys(body.users).length > 0) {
-      city_results = "body.users";
+    if (body.message)   {
+      var city_results = "Sorry. The API rate limit has been exceeded. Run along."
+    } else if (Object.keys(body.users).length > 0) {
+      var randNum = Math.floor(Math.random() * Object.keys(body.users).length)
+      var results = body.users[randNum].username;
+      var city_results = '<a href ="http://www.github.com/'+results+'">'+results+'</a>'
     } else {
-      city_results = "No results found. Try again.";
+      var city_results = "No results found. Try again.";
     }
     res.send(city_results);
+    console.log(city_results)
   });
 });
 

@@ -41,15 +41,25 @@ app.get('/searching', function(req, res){
   };	
   request(request_options, function(err, resp, body) {
     body = JSON.parse(body);
+    console.log(body)
     // search result logic
     if (body.message)   {
       var city_results = "Sorry. The API rate limit has been exceeded. Run along now."
     } else if (Object.keys(body.users).length > 0) {
       var randNum = Math.floor(Math.random() * Object.keys(body.users).length)
       var results = body.users[randNum].username;
+      var fullname = body.users[randNum].fullname;
       var gravatar = body.users[randNum].gravatar_id;
-      var city_results = '<a href ="http://www.github.com/'+results+'">'+results+'</a><br>' +
-        '<img src="https://secure.gravatar.com/avatar/' + gravatar_id + '">'
+      var location = body.users[randNum].location;
+      var language = body.users[randNum].language;
+      var repos = body.users[randNum].repos;
+      var followers = body.users[randNum].followers;
+      var city_results = '<a href ="http://www.github.com/'+results+'">'+fullname+'</a><br>' +
+        '<img src="https://secure.gravatar.com/avatar/' + gravatar + '"><br>' +
+        location + '<br>' +
+        language + '<br>' +
+        repos + ' repos <br>' +
+        followers + ' followers'
     } else {
       var city_results = "No results found. Try again.";
     }

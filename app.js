@@ -30,6 +30,8 @@ app.configure('production', function(){
 // routes
 app.get('/', routes.index);
 app.get('/ping', routes.ping);
+
+// search github
 app.get('/searching', function(req, res){
   var city = req.query.city;
   var url = 'https://api.github.com/legacy/user/search/location:' + city
@@ -39,15 +41,19 @@ app.get('/searching', function(req, res){
   };	
   request(request_options, function(err, resp, body) {
     body = JSON.parse(body);
+    // search result logic
     if (body.message)   {
       var city_results = "Sorry. The API rate limit has been exceeded. Run along now."
     } else if (Object.keys(body.users).length > 0) {
       var randNum = Math.floor(Math.random() * Object.keys(body.users).length)
       var results = body.users[randNum].username;
-      var city_results = '<a href ="http://www.github.com/'+results+'">'+results+'</a>'
+      var gravatar = body.users[randNum].gravatar_id;
+      var city_results = '<a href ="http://www.github.com/'+results+'">'+results+'</a><br>' +
+        '<img src="https://secure.gravatar.com/avatar/' + gravatar_id + '">'
     } else {
       var city_results = "No results found. Try again.";
     }
+    // send data back to client
     res.send(city_results);
     console.log(city_results)
   });

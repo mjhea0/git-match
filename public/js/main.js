@@ -1,11 +1,14 @@
 $(function(){
   $('#btnAgain').hide();
   $('#btnReset').hide();
+  // capture search results
  	$('.search').on('click', function(e){
  		e.preventDefault();
   	var parameters = { city: $('#city').val()};
   	console.log(parameters)
+  	// send results to server
     $.get( '/searching',parameters, function(data) {
+    	// handled returned data
     	$('input').hide();
     	$('#btnSearch').hide();
     	$('#btnAgain').show();
@@ -13,6 +16,7 @@ $(function(){
     	$('#results').html(data);
   	});
  	});
+ 	// reset/start over
  	$('#btnReset').on('click', function(e){
  		e.preventDefault();
  		$('input').val('').show();
